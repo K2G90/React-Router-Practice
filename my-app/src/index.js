@@ -2,12 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import Users from './components/Users';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { Profile } from './components/Profile'
 
 const Root = () => {
   return (
     <BrowserRouter>
-    <App />
+      <div>
+        <Route exact path="/">
+          <App />
+        </Route>
+        <Route path="/users">
+          <Users/>
+        </Route>
+        <Route path="/users/:userId">
+          <Profile />
+        </Route>
+    </div>
     </BrowserRouter>
   );
 };
@@ -15,7 +27,7 @@ const Root = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );
