@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Users from './components/Users';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 import Profile from './components/Profile'
 
 const Root = () => {
@@ -13,20 +13,26 @@ const Root = () => {
   return (
     <BrowserRouter>
       <div>
-        <NavLink to="/">App</NavLink>
+        <NavLink to="/" exact activeStyle={{fontWeight: "bold" }}>App</NavLink>
         <NavLink activeClassName="red" to="/users">Users</NavLink>
         <NavLink activeClassName="blue" to="/hello">Hello</NavLink>
         <NavLink activeClassName="green" to="/users/1">Kendrick's Profile</NavLink>
-        <NavLink to="/" onClick={handleClick}>App with click handler</NavLink>
-        <Route exact path="/">
-          <App />
-        </Route>
-        <Route path="/users">
-          <Users/>
-        </Route>
-        <Route path="/users/:userId">
-          <Profile />
-        </Route>
+        {/* NavLink with onClick prop */}
+        <NavLink to="/" exact onClick={handleClick}>App with click handler</NavLink>
+        <Switch>
+          <Route exact path="/">
+            <App />
+          </Route>
+          <Route path="/users">
+            <Users/>
+          </Route>
+          <Route path="/users/:userId">
+            <Profile />
+          </Route>
+          <Route>
+            <h1>404: Page not found</h1>
+          </Route>
+        </Switch>
     </div>
     </BrowserRouter>
   );
